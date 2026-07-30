@@ -325,12 +325,12 @@ ggsave(paste0('C:/Users/Ke-jia Shan/Desktop/博后/博后课题/CodonUsageBias2/
 # ==========================================
 Asite=fread("Asite_Codon.txt")
 AA=Asite %>% 
-  group_by(Sample_standard,Study,AA,virus_S) %>% 
+  group_by(Sample,Study,AA,virus_S) %>% 
   dplyr::summarise(AA_Peak=sum(Asite_Peak),AA_total=sum(Asite_total),AA_virus=sum(virus),AA_Host=sum(Host))
 
 head(AA)
-ctrl <- filter(Asite, grepl("Ctrl|mock|inf|00hpi", Sample_standard, ignore.case = TRUE)) %>% 
-  group_by(Sample_standard,Study,AA,virus_S) %>% 
+ctrl <- filter(Asite, grepl("Ctrl|mock|inf|00hpi", Sample, ignore.case = TRUE)) %>% 
+  group_by(Sample,Study,AA,virus_S) %>% 
   dplyr::summarise(AA_Peak=sum(Asite_Peak),AA_total=sum(Asite_total),AA_virus=sum(virus),AA_Host=sum(Host))
 
 ctrl=ctrl %>% group_by(Study,AA) %>% dplyr::summarise(Ctrl_Astall=mean(AA_Peak/AA_total))
@@ -446,12 +446,12 @@ ggsave(paste0('C:/Users/Ke-jia Shan/Desktop/博后/博后课题/CodonUsageBias2/
 # ==========================================
 Asite=fread("Asite_Codon.txt")
 AA=Asite %>% 
-  group_by(Sample_standard,Study,AA,virus_S) %>% 
+  group_by(Sample,Study,AA,virus_S) %>% 
   dplyr::summarise(AA_Peak=sum(Psite_Peak),AA_total=sum(Psite_total),AA_virus=sum(virus),AA_Host=sum(Host))
 
 head(AA)
-ctrl <- filter(Asite, grepl("Ctrl|mock|inf|00hpi", Sample_standard, ignore.case = TRUE)) %>% 
-  group_by(Sample_standard,Study,AA,virus_S) %>% 
+ctrl <- filter(Asite, grepl("Ctrl|mock|inf|00hpi", Sample, ignore.case = TRUE)) %>% 
+  group_by(Sample,Study,AA,virus_S) %>% 
   dplyr::summarise(AA_Peak=sum(Psite_Peak),AA_total=sum(Psite_total),AA_virus=sum(virus),AA_Host=sum(Host))
 
 ctrl=ctrl %>% group_by(Study,AA) %>% dplyr::summarise(Ctrl_Pstall=mean(AA_Peak/AA_total))
