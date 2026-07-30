@@ -96,7 +96,7 @@
   #aa_umap[aa_umap$Class %in% c("artiodactyl","perissodactyla","Platypus","Rabbit","MarineMammals","hedgehog","mammal","rodent","primate"),]$Class="other mammals"
   table(aa_umap$Class)
   head(aa_umap)
-  #write.table(aa_umap,"umap_plot20260208.txt",row.names = F,quote = F,sep = "\t")
+  #write.table(aa_umap,"umap_plot2.txt",row.names = F,quote = F,sep = "\t")
   
   #aa_umap=fread("umap_plot2.txt")
   aa_umap$Class=factor(aa_umap$Class,levels = c("Liliopsida_Plant", "eudicotyledons_Plant","other plants",
