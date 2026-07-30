@@ -14,10 +14,11 @@ ggplot(Asite,
   ggpubr::stat_cor(method = "p", col = "red", size = 5,label.y = 9, cor.coef.name = "R") +  # 所有点统一算相关系数
   theme_classic() +
   scale_x_continuous(breaks = c(seq(0,1,0.2)),limits = c(0,1)) +
-  labs(x = "vTBI", y = "Relative stalling rate")
-ggsave('C:/Users/Ke-jia Shan/Desktop/博后/博后课题/CodonUsageBias2/Ensembl/Plot/vTBI_stall_all_relative.pdf', width= 6.07 , height= 4.05 , units='in')
+  labs(x = "vTDI", y = "Relative stalling rate")
+ggsave('C:/Users/Ke-jia Shan/Desktop/博后/博后课题/CodonUsageBias2/Ensembl/Plot/vTDI_stall_all_relative.pdf', width= 6.07 , height= 4.05 , units='in')
 
-
+A2=Asite %>% group_by(Study,Sample) %>% dplyr::summarise(P_Peak1=sum(Psite_Peak),P_total1=sum(Psite_total),A_Peak1=sum(Asite_Peak),A_total1=sum(Asite_total))
+#A2$P_Peak1/A2$P_total1 ==  A2$A_Peak1/A2$A_total1
 #######################################################################################################
 
 #codon level
@@ -33,8 +34,8 @@ ggplot(Asite,
   ggpubr::stat_cor(method = "spearman",size=5, cor.coef.name = "rho") +
   #ggpubr::stat_cor(method = "pearson",,label.y = 30,size=5, cor.coef.name = "R") +  
   theme_classic() +
-  labs(x = "vTBI", y = "Fold change of A-site stalling rate")+
-  #facet_wrap(~Sample_standard,scales = "free") +
+  labs(x = "vTDI", y = "Fold change of A-site stalling rate")+
+  #facet_wrap(~Sample,scales = "free") +
   scale_color_manual(values=c('#EB746A', 
                               #'#D08D0F', 
                               '#9EA020', '#43AE35', '#2CB178',
@@ -55,7 +56,7 @@ ggplot(filter(Asite,Codon=="TTA"),
   ggpubr::stat_cor(method = "spearman",,label.y = 15,size=5, cor.coef.name = "rho") +
   #ggpubr::stat_cor(method = "pearson",,label.y = 30,size=5, cor.coef.name = "R") +  
   theme_classic() +
-  labs(x = "vTBI", y = "Fold change of A-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
+  labs(x = "vTDI", y = "Fold change of A-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
   scale_color_manual(values=c('#EB746A', 
                               #'#D08D0F', 
                               '#9EA020', '#43AE35', '#2CB178',
@@ -75,7 +76,7 @@ ggplot(filter(Asite,Codon=="TTA"),
   ggpubr::stat_cor(method = "spearman",,label.y = 15,size=5, cor.coef.name = "rho") +
   #ggpubr::stat_cor(method = "pearson",,label.y = 30,size=5, cor.coef.name = "R") +  
   theme_classic() +
-  labs(x = "vTBI", y = "Fold change of P-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
+  labs(x = "vTDI", y = "Fold change of P-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
   scale_color_manual(values=c('#EB746A', 
                               #'#D08D0F', 
                               '#9EA020', '#43AE35', '#2CB178',
@@ -97,7 +98,7 @@ ggplot(filter(Asite,Codon=="AGT"),
   #ggpubr::stat_cor(method = "pearson",,label.y = 30,size=5, cor.coef.name = "R") +  
   theme_classic() +
   scale_y_continuous(breaks = seq(0,18,3),limits = c(0,18)) +
-  labs(x = "vTBI", y = "Fold change of A-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
+  labs(x = "vTDI", y = "Fold change of A-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
   scale_color_manual(values=c('#EB746A', 
                               #'#D08D0F', 
                               '#9EA020', '#43AE35', '#2CB178',
@@ -120,7 +121,7 @@ ggplot(filter(Asite,Codon=="TCA"),
   theme_classic() +
   scale_y_continuous(breaks = seq(0,18,3),limits = c(0,18)) +
   scale_x_continuous(breaks = seq(0,1,0.25),limits = c(0,1)) +
-  labs(x = "vTBI", y = "Fold change of P-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
+  labs(x = "vTDI", y = "Fold change of P-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
   scale_color_manual(values=c('#EB746A', 
                               #'#D08D0F', 
                               '#9EA020', '#43AE35', '#2CB178',
@@ -141,7 +142,7 @@ ggplot(filter(Asite,Codon=="AAT"),
   #ggpubr::stat_cor(method = "pearson",,label.y = 30,size=5, cor.coef.name = "R") +  
   theme_classic() +
   scale_x_continuous(limits = c(0,1)) +
-  labs(x = "vTBI", y = "Fold change of A-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
+  labs(x = "vTDI", y = "Fold change of A-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
   scale_color_manual(values=c('#EB746A', 
                               #'#D08D0F', 
                               '#9EA020', '#43AE35', '#2CB178',
@@ -155,7 +156,7 @@ ggplot(filter(Asite,Codon=="AAT"),
 ggsave(paste0('C:/Users/Ke-jia Shan/Desktop/博后/博后课题/CodonUsageBias2/Ensembl/Plot/AsiteStall_GAA.pdf'), width= 6.3739, height= 6.1959  , units='in')
 
 
-ggplot(filter(Asite,Codon=="AAT"), 
+ggplot(filter(Asite,Codon=="ACC"), 
        aes(x = virus/(virus+Host), y = (Psite_Peak/Psite_total)/(Ctrl_Pstall))) +  # 全局去掉 colour/shape
   geom_point(aes(colour = Study, shape = virus_S),size=6) +  # 只在点上分组着色、形状
   geom_smooth(method = "glm", col="black", se = FALSE) +  # 所有点统一拟合
@@ -163,7 +164,7 @@ ggplot(filter(Asite,Codon=="AAT"),
   #ggpubr::stat_cor(method = "pearson",,label.y = 30,size=5, cor.coef.name = "R") +  
   theme_classic() +
   scale_x_continuous(limits = c(0,1)) +
-  labs(x = "vTBI", y = "Fold change of P-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
+  labs(x = "vTDI", y = "Fold change of P-site stalling rate")+facet_wrap(~paste(Codon),scales = "free") +
   scale_color_manual(values=c('#EB746A', 
                               #'#D08D0F', 
                               '#9EA020', '#43AE35', '#2CB178',
@@ -219,29 +220,29 @@ aa_color <- data.frame(
 color_map_AA3 <- setNames(aa_color$color, aa_color$AA3)
 
 # ===================== 读取 & 构建排序依据 =====================
- mid <- fread("HEK293FT_RSCU.txt")
- 
- # 排序：先 AA3 → 再 RSCU 降序（你要求的排序）
- mid_sorted <- mid %>%
-   mutate(
-     Codon3 = substr(Codon, 3, 3),
-     Codon3_group = ifelse(Codon3 %in% c("C", "G"), "CG", "AT")  # 第3位 CG/AT
-   ) %>%
-   arrange(
-     AA3,                  # 第一排序：氨基酸
-     Codon3_group,         # 第二排序：CG 在前，AT 在后
-     desc(RSCU)            # 第三排序：RSCU 从大到小
-   )
-# 构建 mid1 = AA3:Codon
- mid1 <- paste0(mid_sorted$AA3, ":", mid_sorted$Codon)
+mid <- fread("./HEK293FT_RSCU.txt")
 
+# 排序：先 AA3 → 再 RSCU 降序（你要求的排序）
+mid_sorted <- mid %>%
+  mutate(
+    Codon3 = substr(Codon, 3, 3),
+    Codon3_group = ifelse(Codon3 %in% c("C", "G"), "CG", "AT")  # 第3位 CG/AT
+  ) %>%
+  arrange(
+    AA3,                  # 第一排序：氨基酸
+    Codon3_group,         # 第二排序：CG 在前，AT 在后
+    desc(RSCU)            # 第三排序：RSCU 从大到小
+  )
+# 构建 mid1 = AA3:Codon
+mid1 <- paste0(mid_sorted$AA3, ":", mid_sorted$Codon)
+cor_table$AA_Codon=factor(cor_table$AA_Codon,levels = mid1)
 
 # ===================== 绘图：Spearman（按 AA3 着色 + 固定顺序） =====================
 p_spearman <- ggplot(cor_table, aes(x = AA_Codon, y = spearman_rho, fill = AA3)) +
   geom_col(width = 0.75) +
   geom_text(aes(label = p_star_spearman), vjust = -0.5, size = 5) +
   scale_fill_manual(values = color_map_AA3) +  # 用 AA3 配色
-  labs(x = "AA:Codon", y = "Spearman's rho\n(vTBI vs. fold change of A-site stalling rate)") +
+  labs(x = "AA:Codon", y = "Spearman's rho\n(vTDI vs. fold change of A-site stalling rate)") +
   #scale_y_continuous(breaks = c(seq(0,0.6,0.1)),limits = c(0,0.601)) +
   theme_classic() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
@@ -307,7 +308,7 @@ p_spearman <- ggplot(cor_table, aes(x = AA_Codon, y = spearman_rho, fill = AA3))
   geom_col(width = 0.75) +
   geom_text(aes(label = p_star_spearman), vjust = -0.5, size = 5) +
   scale_fill_manual(values = color_map_AA3) +  # 用 AA3 配色
-  labs(x = "AA:Codon", y = "Spearman's rho\n(vTBI vs. fold change of P-site stalling rate)") +
+  labs(x = "AA:Codon", y = "Spearman's rho\n(vTDI vs. fold change of P-site stalling rate)") +
   scale_y_continuous(breaks = c(seq(0,0.6,0.1)),limits = c(0,0.601)) +
   theme_classic() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
@@ -347,7 +348,7 @@ ggplot(Asite,
   ggpubr::stat_cor(method = "spearman",,label.y = 25,size=5, cor.coef.name = "rho") +
   #ggpubr::stat_cor(method = "pearson",,label.y = 20,size=5, cor.coef.name = "R") +  
   theme_classic() +
-  labs(x = "vTBI", y = "Relative stalling rate")+#facet_wrap(~paste(AA,":",Codon),scales = "free") +
+  labs(x = "vTDI", y = "Relative stalling rate")+#facet_wrap(~paste(AA,":",Codon),scales = "free") +
   scale_color_manual(values=c('#EB746A', 
                               #'#D08D0F', 
                               '#9EA020', '#43AE35', '#2CB178',
@@ -370,7 +371,7 @@ ggplot(filter(Asite,AA=="V"),
   #ggpubr::stat_cor(method = "pearson",,label.y = 20,size=5, cor.coef.name = "R") +  
   theme_classic() +
   scale_x_continuous(breaks = c(seq(0,1,0.25)),limits = c(0,1)) +
-  labs(x = "vTBI", y = "Relative stalling rate")+#facet_wrap(~paste(AA,":",Codon),scales = "free") +
+  labs(x = "vTDI", y = "Relative stalling rate")+#facet_wrap(~paste(AA,":",Codon),scales = "free") +
   scale_color_manual(values=c('#EB746A', 
                               #'#D08D0F', 
                               '#9EA020', '#43AE35', '#2CB178',
@@ -429,7 +430,7 @@ p_spearman <- ggplot(cor_table, aes(x = AA3, y = spearman_rho, fill = AA)) +
   geom_col(width = 0.75) +
   geom_text(aes(label = p_star_spearman), vjust = -0.5, size = 5) +
   scale_fill_manual(values = color_map) +  # 已替换为你的配色
-  labs(x = "AA", y = "Spearman's rho\n(vTBI vs. fold change of stalling rate)") +
+  labs(x = "AA", y = "Spearman's rho\n(vTDI vs. fold change of stalling rate)") +
   theme_classic() +
   scale_y_continuous(breaks = seq(0, 0.6, 0.1), limits = c(0, 0.601)) +
   theme(axis.text.x = element_text(size = 10),
@@ -468,7 +469,7 @@ ggplot(Asite,
   ggpubr::stat_cor(method = "spearman",,label.y = 25,size=5, cor.coef.name = "rho") +
   #ggpubr::stat_cor(method = "pearson",,label.y = 20,size=5, cor.coef.name = "R") +  
   theme_classic() +
-  labs(x = "vTBI", y = "Fold change of stalling\nrate relative Ctrl")+#facet_wrap(~paste(AA,":",Codon),scales = "free") +
+  labs(x = "vTDI", y = "Fold change of stalling\nrate relative Ctrl")+#facet_wrap(~paste(AA,":",Codon),scales = "free") +
   scale_color_manual(values=c('#EB746A', 
                               #'#D08D0F', 
                               '#9EA020', '#43AE35', '#2CB178',
@@ -490,7 +491,7 @@ ggplot(filter(Asite,AA=="V"),
   #ggpubr::stat_cor(method = "pearson",,label.y = 20,size=5, cor.coef.name = "R") +  
   theme_classic() +
   scale_x_continuous(breaks = c(seq(0,1,0.25)),limits = c(0,1)) +
-  labs(x = "vTBI", y = "Relative stalling rate")+#facet_wrap(~paste(AA,":",Codon),scales = "free") +
+  labs(x = "vTDI", y = "Relative stalling rate")+#facet_wrap(~paste(AA,":",Codon),scales = "free") +
   scale_color_manual(values=c('#EB746A', 
                               #'#D08D0F', 
                               '#9EA020', '#43AE35', '#2CB178',
@@ -549,7 +550,7 @@ p_spearman <- ggplot(cor_table, aes(x = AA3, y = spearman_rho, fill = AA)) +
   geom_col(width = 0.75) +
   geom_text(aes(label = p_star_spearman), vjust = -0.5, size = 5) +
   scale_fill_manual(values = color_map) +  # 已替换为你的配色
-  labs(x = "AA", y = "Spearman's rho\n(vTBI vs. fold change of stalling rate)") +
+  labs(x = "AA", y = "Spearman's rho\n(vTDI vs. fold change of stalling rate)") +
   theme_classic() +
   scale_y_continuous(breaks = seq(0, 0.6, 0.1), limits = c(0, 0.601)) +
   theme(axis.text.x = element_text(size = 10),
