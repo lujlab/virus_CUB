@@ -218,23 +218,23 @@ aa_color <- data.frame(
 # 生成 AA3 颜色映射（按 AA3 着色，核心修改）
 color_map_AA3 <- setNames(aa_color$color, aa_color$AA3)
 
-# # ===================== 读取 & 构建排序依据 =====================
-# mid <- fread("HEK293FT_RSCU.txt")
-# 
-# # 排序：先 AA3 → 再 RSCU 降序（你要求的排序）
-# mid_sorted <- mid %>%
-#   mutate(
-#     Codon3 = substr(Codon, 3, 3),
-#     Codon3_group = ifelse(Codon3 %in% c("C", "G"), "CG", "AT")  # 第3位 CG/AT
-#   ) %>%
-#   arrange(
-#     AA3,                  # 第一排序：氨基酸
-#     Codon3_group,         # 第二排序：CG 在前，AT 在后
-#     desc(RSCU)            # 第三排序：RSCU 从大到小
-#   )
-# # 构建 mid1 = AA3:Codon
-# mid1 <- paste0(mid_sorted$AA3, ":", mid_sorted$Codon)
-# 
+# ===================== 读取 & 构建排序依据 =====================
+ mid <- fread("HEK293FT_RSCU.txt")
+ 
+ # 排序：先 AA3 → 再 RSCU 降序（你要求的排序）
+ mid_sorted <- mid %>%
+   mutate(
+     Codon3 = substr(Codon, 3, 3),
+     Codon3_group = ifelse(Codon3 %in% c("C", "G"), "CG", "AT")  # 第3位 CG/AT
+   ) %>%
+   arrange(
+     AA3,                  # 第一排序：氨基酸
+     Codon3_group,         # 第二排序：CG 在前，AT 在后
+     desc(RSCU)            # 第三排序：RSCU 从大到小
+   )
+# 构建 mid1 = AA3:Codon
+ mid1 <- paste0(mid_sorted$AA3, ":", mid_sorted$Codon)
+
 
 # ===================== 绘图：Spearman（按 AA3 着色 + 固定顺序） =====================
 p_spearman <- ggplot(cor_table, aes(x = AA_Codon, y = spearman_rho, fill = AA3)) +
